@@ -28,24 +28,24 @@
       <!-- Page Header-->
       <header class="section page-header" >
         <!-- RD Navbar-->
-        <div class="rd-navbar-wrap" >
+        <div class="rd-navbar-wrap">
           <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="106px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
             <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
             <div class="rd-navbar-aside-outer">
               <div class="rd-navbar-aside">
                 <!-- RD Navbar Panel-->
-                <div class="rd-navbar-panel" ><h5>equilibrium</h5>
+                <div class="rd-navbar-panel">
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                  <!-- RD Navbar Logo-->
+                  <!-- RD Navbar Brand-->
                   <div class="rd-navbar-brand">
-                    <!--Brand--><a class="brand" href="index.html"><img src="#" alt="" width="225" height="18"/></a>
+                    <!--Brand--><a class="brand" href="index.html"><img src="images/logo-default-450x37.png" alt="" width="225" height="18"/></a>
                   </div>
                 </div>
                 <div class="rd-navbar-aside-right rd-navbar-collapse">
+                  {{--
                   <ul class="rd-navbar-corporate-contacts" >
                     <li>
-                      {{--
                       <div class="unit unit-spacing-xs">
                         <div class="unit-left"><span class="icon fa fa-clock-o"></span></div>
                         <div class="unit-body">
@@ -57,9 +57,18 @@
                       <div class="unit unit-spacing-xs">
                         <div class="unit-left"><span class="icon fa fa-phone"></span></div>
                         <div class="unit-body"><a class="link-phone" href="tel:#">+1 323-913-4688</a></div>
-                      </div>--}}
+                      </div>
                     </li>
-                  </ul><a class="button button-md button-default-outline-2 button-ujarak" href="https://hotmart.com/pt-br">Consiga seu pacote Completo!</a>
+                    --}}
+                  </ul>
+                  @auth
+                  <a class="button button-md button-default-outline-2 button-ujarak" style='margin: 5px 0px; padding: 3px 3px 3px 3px' href="{{route('dashboard.index')}}">Dashboard</a>
+                  <a class="button button-md button-default-outline-2 button-ujarak" style='margin: 5px 5px; padding: 3px 3px 3px 3px' href="{{route('logout')}}">Logout</a>
+                  @else
+                  <a class="button button-md button-default-outline-2 button-ujarak" style='margin: 5px 0px;border-radius: 25px; padding: 3px 3px 3px 3px' href="{{route('login.form')}}">Login</a>
+                  <a class="button button-md button-default-outline-2 button-ujarak" style='margin: 5px 5px;border-radius: 25px; padding: 3px 3px 3px 3px' href="{{route('cadastro.form')}}">Cadastro</a>
+                  <a class="button button-md button-default-outline-2 button-ujarak" style='margin: 5px 20px;' href="https://hotmart.com/pt-br">Consiga seu pacote Completo!</a>
+                  @endauth
                 </div>
               </div>
             </div>
@@ -81,6 +90,8 @@
                     <li class="rd-nav-item"><a class="rd-nav-link" href="typography.html">Ferramenta</a>
                     </li>
                     <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">Contato</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="{{route('cadastro.form')}}">cadastro</a>
                     </li>
                   </ul>
                 </div>

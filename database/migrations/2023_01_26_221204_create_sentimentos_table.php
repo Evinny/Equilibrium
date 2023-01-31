@@ -13,18 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('sentimentos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('telefone', 40)->nullable();
-            $table->string('hotmart_id', 50);
-            
-            
-            $table->rememberToken();
             $table->timestamps();
+            $table->string('sentimento', 100);
+        });
+
+        schema::table('inputs', function (blueprint $table){
+            $table->foreign('sentimento_id')->references('id')->on('sentimentos');
         });
     }
 
@@ -35,6 +31,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        schema::table('inputs', function (blueprint $table){
+            $table->dropforeign('inputs_sentimento_id_foreign');
+        });
+
+        Schema::dropIfExists('sentimentos');
     }
 };
