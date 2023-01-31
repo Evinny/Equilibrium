@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('habitos', function (Blueprint $table) {
+        Schema::create('habits', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('nome');
             $table->string('categoria');
         });
 
-        schema::table('inputs', function (blueprint $table){
-            $table->foreign('habito_id')->references('id')->on('habitos');
+        schema::table('responses', function (blueprint $table){
+            $table->foreign('habit_id')->references('id')->on('habits');
         });
     }
 
@@ -33,11 +33,11 @@ return new class extends Migration
     public function down()
     {
 
-        schema::table('inputs', function(blueprint $table){
-            $table->dropforeign('inputs_habito_id_foreign');
+        schema::table('responses', function(blueprint $table){
+            $table->dropforeign('responses_habits_id_foreign');
         
         });
 
-        Schema::dropIfExists('habitos');
+        Schema::dropIfExists('habits');
     }
 };

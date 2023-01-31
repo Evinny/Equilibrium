@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-
-         
-
-         //------INPUTS FOREIGN-------//
-
-        schema::table('responses', function(blueprint $table){
+        schema::create('user_emotions', function(blueprint $table){
             $table->unsignedbiginteger('user_id');
+            $table->unsignedbiginteger('emotion_id');
         });
 
-        schema::table('responses', function(blueprint $table){
+        schema::table('user_emotions', function(blueprint $table){
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('emotion_id')->references('id')->on('emotions');
         });
     }
 
@@ -34,14 +31,11 @@ return new class extends Migration
      */
     public function down()
     {
-        //
-
-        
-
-        schema::table('responses', function(blueprint $table){
-            $table->dropforeign('responses_user_id_foreign');
-            $table->dropcolumn('user_id');
+        schema::table('user_emotions', function(blueprint $table){
+            $table->dropforeign('user_emotions_emotion_id_foreign');
+            $table->dropforeign('user_emotions_user_id_foreign');
         });
-        
+
+        schema::dropifexists('user_emotions');
     }
 };

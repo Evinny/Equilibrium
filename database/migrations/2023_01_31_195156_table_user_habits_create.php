@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-
-         
-
-         //------INPUTS FOREIGN-------//
-
-        schema::table('responses', function(blueprint $table){
+        schema::create('user_habits', function(blueprint $table){
             $table->unsignedbiginteger('user_id');
+            $table->unsignedbiginteger('habit_id');
         });
 
-        schema::table('responses', function(blueprint $table){
+        schema::table('user_habits', function(blueprint $table){
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('habit_id')->references('id')->on('habits');
         });
     }
 
@@ -34,14 +31,11 @@ return new class extends Migration
      */
     public function down()
     {
-        //
-
-        
-
-        schema::table('responses', function(blueprint $table){
-            $table->dropforeign('responses_user_id_foreign');
-            $table->dropcolumn('user_id');
+        schema::table('user_habits', function(blueprint $table){
+            $table->dropforeign('user_habits_habit_id_foreign');
+            $table->dropforeign('user_habits_user_id_foreign');
         });
-        
+
+        schema::dropifexists('user_habits');
     }
 };

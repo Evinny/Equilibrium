@@ -20,7 +20,7 @@
 
 </head>
 <body>
-    <br><br>
+    <br><img src='images/equilibrium_photos/images/dashboard/arrow-pointing-to-left.png' alt='arrow'><br>
     <hr>
 <br><br>
     <form method="post" action="#">
@@ -44,6 +44,12 @@
     <input style='float:right;width: 65%;height:50px;border-style: ridge; border-radius: 5px; border-width: 1px' name="sentimento" id="sentimento" 
                 type="text" > </span></p>
         </div>
+
+
+        {{dd($user)}}
+
+
+
 
         <div style="height: 10%; 
         width:100%;

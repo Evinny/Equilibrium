@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inputs', function (Blueprint $table) {
+        Schema::create('responses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedbiginteger('habito_id');
+            $table->unsignedbiginteger('habit_id');
             $table->datetime('data_hora');
-            $table->unsignedbiginteger('sentimento_id');
+            $table->unsignedbiginteger('emotion_id');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inputs');
+        Schema::dropIfExists('responses');
     }
 };

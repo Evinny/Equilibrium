@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sentimentos', function (Blueprint $table) {
+        Schema::create('emotions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('sentimento', 100);
         });
 
-        schema::table('inputs', function (blueprint $table){
-            $table->foreign('sentimento_id')->references('id')->on('sentimentos');
+        schema::table('responses', function (blueprint $table){
+            $table->foreign('emotion_id')->references('id')->on('emotions');
         });
     }
 
@@ -31,10 +31,10 @@ return new class extends Migration
      */
     public function down()
     {
-        schema::table('inputs', function (blueprint $table){
-            $table->dropforeign('inputs_sentimento_id_foreign');
+        schema::table('responses', function (blueprint $table){
+            $table->dropforeign('responses_emotion_id_foreign');
         });
 
-        Schema::dropIfExists('sentimentos');
+        Schema::dropIfExists('emotions');
     }
 };
