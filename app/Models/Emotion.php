@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sentimento extends Model
+class Emotion extends Model
 {
     use HasFactory;
 
 
-    public function input(){
-        return $this->hasmany(Input::class, 'sentimento_id', 'id');
+    public function response(){
+        return $this->hasmany(Response::class, 'Emotion_id', 'id');
     }
 }

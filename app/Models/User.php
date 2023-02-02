@@ -45,7 +45,7 @@ class User extends Authenticatable
     ];
 
     public function input(){
-        return $this->hasmany(Input::class, 'user_id', 'id');
+        return $this->hasmany(Response::class, 'user_id', 'id');
     }
 
 

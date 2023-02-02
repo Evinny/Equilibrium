@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Habito extends Model
+class Habit extends Model
 {
     use HasFactory;
 
     protected $fillable = ['nome', 'categoria'];
 
-    public function input(){
-        return $this->hasmany(Input::class, 'habito_id', 'id');
+    public function response(){
+        return $this->hasmany(Response::class, 'habit_id', 'id');
     }
 }

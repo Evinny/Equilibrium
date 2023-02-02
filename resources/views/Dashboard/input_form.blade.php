@@ -23,7 +23,7 @@
     <br><img src='images/equilibrium_photos/images/dashboard/arrow-pointing-to-left.png' alt='arrow'><br>
     <hr>
 <br><br>
-    <form method="post" action="#">
+    <form method="post" action="{{route('dashboard.input.insert')}}">
     <center>
     
     
@@ -46,8 +46,7 @@
         </div>
 
 
-        {{dd($user)}}
-
+        
 
 
 
