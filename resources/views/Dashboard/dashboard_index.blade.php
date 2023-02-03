@@ -23,22 +23,22 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Habito', ''],
-          ['açucar', 10],
-          ['alcool', 2],
-          ['netflix', 14 ],
-          ['exercicio', 9 ],
-          ['açucar', 10],
-          ['alcool', 2],
-          ['netflix', 14 ],
-          ['exercicio', 9 ],
-          ['açucar', 10],
-          ['alcool', 2],
-          ['netflix', 14 ],
-          ['exercicio', 9 ],
-          ['açucar', 10],
-          ['alcool', 2],
-          ['netflix', 14 ],
-          ['exercicio', 9 ]
+          @php
+            if(isset($habits)){
+
+            
+            foreach($habits as $habit => $times)
+            {
+                echo "['" . $habit . "', " . $times . "],";
+            }
+
+            }
+            @endphp
+          
+          
+          
+         
+          
         ]);
 
         $(window).resize(function(){
@@ -148,7 +148,13 @@
 
 
       <center>
-      <div id="barchart_material" style="width: 100%; height: 800px;"></div>
+
+        @if(isset($habits))
+          <div id="barchart_material" style="width: 100%; height: 600px;"></div>
+        @else 
+          <h3>Começe adicionando seu primeiro Habito, Apertando no <b>"+"</b></h3>
+        @endif
+
       </center>
       <br><Br>
       <div style="position: fixed; right:2%; bottom:5%; width:5%; min-width:50px">

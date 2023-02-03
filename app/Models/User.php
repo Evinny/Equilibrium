@@ -44,9 +44,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function input(){
+    public function responses(){
         return $this->hasmany(Response::class, 'user_id', 'id');
     }
 
+
+    public function habits(){
+        return $this->belongstomany(Habit::class, 'user_habits');
+    }
+
+    public function emotions(){
+        return $this->belongstomany(Emotion::class, 'user_emotions');
+    }
 
 }

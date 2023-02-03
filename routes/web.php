@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResponseController;
-
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,12 +40,10 @@ route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
 route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(function(){
-    route::get('/home', function(){
-        return view('Dashboard.dashboard_index');
-    })->name('index');
+    route::get('/home', [DashboardController::class, 'index'])->name('index');
 
     route::get('/home/inserir', [ResponseController::class, 'input_form'])->name('input.form');
-    route::get('/home/inserir', [ResponseController::class, 'response_store'])->name('input.insert');
+    route::post('/home/inserir', [ResponseController::class, 'response_store'])->name('input.insert');
     
-    //route::post('/habitos/debug', [InputController::class, 'habitos_debug'])->name('habitos.store');
+
 });

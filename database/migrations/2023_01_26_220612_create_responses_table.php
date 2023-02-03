@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedbiginteger('habit_id');
-            $table->datetime('data_hora');
+            $table->datetime('date_time');
             $table->unsignedbiginteger('emotion_id');
         });
     }

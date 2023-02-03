@@ -11,7 +11,7 @@ class Response extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date_time', 'user_id', 'sentimento_id', 'habito_id'];
+    protected $fillable = ['date_time', 'user_id', 'emotion_id', 'habit_id'];
 
     public function habits(){
         return $this->belongsto(Habit::class, 'habit_id', 'id');

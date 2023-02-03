@@ -14,6 +14,8 @@ return new class extends Migration
     public function up()
     {
         schema::create('user_emotions', function(blueprint $table){
+            $table->id();
+            $table->timestamps();
             $table->unsignedbiginteger('user_id');
             $table->unsignedbiginteger('emotion_id');
         });

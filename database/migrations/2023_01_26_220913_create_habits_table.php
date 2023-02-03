@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('habits', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nome');
-            $table->string('categoria');
+            $table->string('name');
+            $table->string('category');
         });
 
         schema::table('responses', function (blueprint $table){
@@ -34,7 +34,7 @@ return new class extends Migration
     {
 
         schema::table('responses', function(blueprint $table){
-            $table->dropforeign('responses_habits_id_foreign');
+            $table->dropforeign('responses_habit_id_foreign');
         
         });
 

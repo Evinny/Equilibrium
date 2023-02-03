@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('emotions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('sentimento', 100);
+            $table->string('emotion', 100);
         });
 
         schema::table('responses', function (blueprint $table){

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Habit;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Response;
 use App\Models\User;
+use App\Models\Emotion;
+use App\Models\Habit;
 
 
 
@@ -19,17 +20,31 @@ class ResponseController extends Controller
 
         $user = User::find(auth::user()->id);   
         
-        $input = Response::find(1);
-        return view('Dashboard.input_form', ['user' => $user, 'input' => $input]);
+        $habits = Habit::all();
+        $emotions = Emotion::all();
+        return view('Dashboard.input_form', ['user' => $user, 'habits' => $habits, 'emotions' => $emotions]);
     }
 
     public function response_store(request $request){
+        
+        if( !(User::find(auth::id()))){
+            return redirect(url()->previous())->with('error', 'oops, houve um probleminha, tente novamente.');
+
+        }
+
+        $habit = Habit::where('name', '=', $request->habit)->get()->first();
+        $emotion = emotion::where('emotion', '=', $request->emotion)->get()->first();
+        
+        
         Response::create([
-            'data_hora' => $request->data,
-            'habito_id' => $request->habito,
-            'sentimento_id' => $request->sentimento,
-            'user_id' => auth::user()->id
+            'date_time' => $request->data,
+            'habit_id' => $habit->id,
+            'emotion_id' => $emotion->id,
+            'user_id' => auth::id()
         ]);
+
+        return redirect()->route('dashboard.index');
+
     }
 
 
