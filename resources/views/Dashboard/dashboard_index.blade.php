@@ -18,9 +18,15 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChartBars);
+      
 
-      function drawChart() {
+
+      function drawChartBars() {
+        $(window).resize(function(){
+          drawChartBars();
+        });
+       
         var data = google.visualization.arrayToDataTable([
           ['Habito', ''],
           @php
@@ -41,9 +47,7 @@
           
         ]);
 
-        $(window).resize(function(){
-          drawChart();
-        });
+        
 
         var options = {
           
@@ -56,12 +60,53 @@
         };
 
         var chart = new google.charts.Bar(document.getElementById('barchart_material'));
-
+        
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
+
+      
+
+      
     </script>
-  
     
+    <script>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChartPizza);
+
+      function drawChartPizza() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          
+          
+          @php
+            if(isset($data)){
+
+            
+            foreach($data as $name => $amount)
+            {
+                echo "['" . $name . "', " . $amount . "],";
+            }
+
+            }
+            @endphp
+        ]);
+
+        var options = {
+          @php
+          if(isset($color)){
+            echo($color);
+          }
+          @endphp
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+
   </head>
   <body>
     
@@ -77,15 +122,34 @@
       <div style='text-align:left;padding: 2% 0 0 2%';>
       <img src="/images/logo-default-450x37.png" alt="" width="225" height="18">
       </div>
-
+      
       <center>
 
+        
+        @if(isset($data) and !(request()->pag == 3))
+          <div id="barchart_material" style="height: 200px;"></div>
+          @elseif(request()->pag == 3)
+            <div id="piechart" style="width: 900px; height: 500px;"></div>
+          
+          @else 
+          <h3 style='padding:5%;'>Ola, Por favor, Selecione o seu pacote de habitos abaixo...</h3>
+          <form method="post" action="{{route('dashboard.habits.setup')}}" autocomplete="off">
+          <input style='width: 65%;height:50px;border-style: ridge; border-radius: 5px; border-width: 1px;text-align: center;' 
+          list='habits' name="habit"> 
 
-        @if(isset($data))
-          <div id="barchart_material" style="width: 100%;"></div>
-        @else 
-          <h3>Começe adicionando seu primeiro Habito, Apertando no <b>"+"</b></h3>
-        @endif
+              <datalist id='habits' >
+
+                 
+                  <option value='Original'> Os Habitos genericos que todos deviamos nos acostumar </option>
+                  <option value='Hospitalar'> Habitos especificos para uma vida mais hospitalar e pediatrica</option>
+                  <option value='Estudante'> Habitos de um estudante, nada de estudante de magia, apenas trouxas aqui</option>
+                  
+              </datalist>
+              <br><br>
+            <button type="submit">Salvar</button>
+          </form>
+
+          @endif
         <br><br><br>
         
       </center>
@@ -93,14 +157,14 @@
       <div style="position: fixed; right:2%; bottom:5%; width:5%; min-width:50px">
         <a href={{route('dashboard.input.form')}}><img src="\images\equilibrium_photos\images\dashboard\blue-plus-icon-9.png" alt='Adicionar'></a>
       </div>
-    
+        
       
         <div style="position: fixed; bottom:5%;border-style:ridge;">
           <div class="pagination">
           
           <a href="{{route('dashboard.index', ['pag' => 1])}}"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="{{route('dashboard.index', ['pag' => 2])}}"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
-          <a href="#"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
+          <a href="{{route('dashboard.index', ['pag' => 3])}}"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="#"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="#"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="#"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>

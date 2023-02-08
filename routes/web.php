@@ -45,5 +45,5 @@ route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(funct
     route::get('/home/inserir', [ResponseController::class, 'input_form'])->name('input.form');
     route::post('/home/inserir', [ResponseController::class, 'response_store'])->name('input.insert');
     
-
+    route::post('/home/setup');
 });
