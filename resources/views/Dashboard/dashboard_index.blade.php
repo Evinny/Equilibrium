@@ -53,8 +53,7 @@
           
           chart: {
             responsive: true,
-            title: 'Habito',
-            subtitle: 'Habito',
+            
           },
           bars: 'horizontal' // Required for Material Bar Charts.
         };
@@ -127,7 +126,7 @@
 
         
         @if(isset($data) and !(request()->pag == 3))
-          <div id="barchart_material" style="height: 200px;"></div>
+          <div id="barchart_material" style="height: 500px;"></div>
           @elseif(request()->pag == 3)
             <div id="piechart" style="width: 900px; height: 500px;"></div>
           
@@ -170,96 +169,6 @@
           <a href="#"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       <!-- Page Footer-->
       

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HabitController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,5 +47,5 @@ route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(funct
     route::get('/home/inserir', [ResponseController::class, 'input_form'])->name('input.form');
     route::post('/home/inserir', [ResponseController::class, 'response_store'])->name('input.insert');
     
-    route::post('/home/setup');
+    route::post('/home/setup', [HabitController::class, 'user_habit_setup'])->name('habits.setup');
 });

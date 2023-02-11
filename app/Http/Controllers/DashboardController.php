@@ -12,18 +12,71 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
+
+
+
+        //$boolean, boolean
+    private function habits_filter(){
+        
+                    $_user = auth::user();
+                    $habits_ids = Habit::all()->pluck('category', 'name');
+                    $types = [];
+                    $data = [];
+                    $habit_name = [];
+                    
+                    
+                    foreach($habits_ids as $name => $category){ //[2 => bad]
+
+                                $types += [$name => $category]; //add to types [foreign id => bad]
+                                
+                    }
+         
+                
+                $all_types = array_unique($types); //outputs only the types, with no repeated entryes
+                
+                foreach ($all_types as $category){ //for each good, bad and neutral
+                    
+                    
+                    foreach ($types as $name => $nested_category){ //[foreign id => bad or neutral or good]
+                        if($nested_category == $category){ //if loop category is equal to one in all category entryes
+                            array_push($habit_name, $name);
+                        }
+                    }
+
+                    $data += [$category => $habit_name]; //this returns us all 3 types, and how many times they have been done
+                    $habit_name = [];
+                }
+                return $data;
+            }
+
+
+
+
     public function index(request $request){
         
         $_user = auth::user();
+        
+        //mandar o user e talvez um paginate pra ca
+        if($_user->habits->isempty() ){
 
-        //first time user fallback
+            
+            $emotions = Emotion::all();
+
+            return view('Dashboard.habits_setup', [
+                'user' => Auth::user(), 
+                'habits' => $this->habits_filter(),
+                'emotions' => $emotions
+                ]);
+        }
+
+        //no user response fallback
         if($_user->responses->isempty() ){
             return view('Dashboard.dashboard_index');
-        }
+            }
 
         if(!(isset($request->pag))){
             $request->pag = 1;
-        }
+            }
         
         $times = 0;
 
@@ -119,16 +172,17 @@ class DashboardController extends Controller
                 $color = "colors: [";
                 arsort($data);//sorts higher to lower
                 foreach($data as $category => $times){
-                    if(strtolower($category) == 'ruim'){
+                    if($category == '☹️Ruins'){
                         $color .= "'#e62e00',";
                     }
 
-                    if(strtolower($category) == 'bom'){
+                    if($category == '🙂Bons'){
                         $color .= "'#0055ff',";
                     }
 
-                    if(strtolower($category) == 'neutro'){
+                    if($category == '😐Neutros'){
                         $color .= "'#d8d10e',";
+                        
                     }
                 }
                 $color .= ']';
@@ -145,9 +199,9 @@ class DashboardController extends Controller
             //['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo']
 
 
-
+            /*
             $habits_ids = User::find(auth::id())->with('habits')->get()->first();
-            dd($habits_ids->habits);
+            
             $data = [];
             $types= [];
 
@@ -175,7 +229,7 @@ class DashboardController extends Controller
                     
                     }
                 }
-
+                */
 
              //SAYS THE DAYT OF THE WEEEEKKEKEKEKEK
 
