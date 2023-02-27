@@ -49,7 +49,8 @@ class UserController extends Controller
             'password' => hash::make($request->password),
             'telefone' => $request->telefone,
             'email' => $request->email,
-            'hotmart_id' => $request->hotmart_id
+            'hotmart_id' => $request->hotmart_id,
+            
         ]);
 
         return redirect()->route('home');

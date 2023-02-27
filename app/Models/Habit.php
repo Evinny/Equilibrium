@@ -11,7 +11,7 @@ class Habit extends Model
 
     protected $fillable = ['name', 'category'];
 
-    public function response(){
+    public function responses(){
         return $this->hasmany(Response::class, 'habit_id', 'id');
     }
 

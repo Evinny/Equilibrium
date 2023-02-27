@@ -8,7 +8,7 @@ use App\Models\Response;
 use App\Models\User;
 use App\Models\Emotion;
 use App\Models\Habit;
-
+use Carbon\Carbon;
 
 
 class ResponseController extends Controller
@@ -17,12 +17,12 @@ class ResponseController extends Controller
 
     public function input_form(){
 
-
-        $user = User::find(auth::user()->id);   
         
-        $habits = Habit::all();
+        $user = User::find(auth::user()->id);   
+        $date = Carbon::now();
+        $habits = $user->habits;
         $emotions = Emotion::all();
-        return view('Dashboard.input_form', ['user' => $user, 'habits' => $habits, 'emotions' => $emotions]);
+        return view('Dashboard.input_form', ['user' => $user, 'habits' => $habits, 'emotions' => $emotions, 'date' => $date]);
     }
 
     public function response_store(request $request){

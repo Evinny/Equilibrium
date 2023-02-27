@@ -31,12 +31,17 @@
           ['Habito', ''],
           @php
             if(isset($data)){
+              if($isNested){
 
+              }
+              else{
+                foreach($data as $name => $amount)
+                {
+                    echo "['" . $name . "', " . $amount . "],";
+                }
+              }
+              
             
-            foreach($data as $name => $amount)
-            {
-                echo "['" . $name . "', " . $amount . "],";
-            }
 
             }
             @endphp
@@ -80,13 +85,16 @@
           
           @php
             if(isset($data)){
+              if($isNested){
 
-            
-            foreach($data as $name => $amount)
-            {
-                echo "['" . $name . "', " . $amount . "],";
-            }
+              }
+              else{
 
+                foreach($data as $name => $amount)
+                {
+                    echo "['" . $name . "', " . $amount . "],";
+                }
+              }
             }
             @endphp
         ]);
@@ -126,27 +134,15 @@
 
         
         @if(isset($data) and !(request()->pag == 3))
+          {{print_r($data)}}
           <div id="barchart_material" style="height: 500px;"></div>
           @elseif(request()->pag == 3)
             <div id="piechart" style="width: 900px; height: 500px;"></div>
           
+          but with pizza
           @else 
-          <h3 style='padding:5%;'>Ola, Por favor, Selecione o seu pacote de habitos abaixo...</h3>
-          <form method="post" action="{{route('dashboard.habits.setup')}}" autocomplete="off">
-          <input style='width: 65%;height:50px;border-style: ridge; border-radius: 5px; border-width: 1px;text-align: center;' 
-          list='habits' name="habit"> 
-
-              <datalist id='habits' >
-
-                 
-                  <option value='Original'> Os Habitos genericos que todos deviamos nos acostumar </option>
-                  <option value='Hospitalar'> Habitos especificos para uma vida mais hospitalar e pediatrica</option>
-                  <option value='Estudante'> Habitos de um estudante, nada de estudante de magia, apenas trouxas aqui</option>
-                  
-              </datalist>
-              <br><br>
-            <button type="submit">Salvar</button>
-          </form>
+          <h3 style='padding:5%;'>Ola, Para começar, Insira o seu Primeirissimo Habito no botao de "+"</h3>
+          
 
           @endif
         <br><br><br>
@@ -164,6 +160,7 @@
           <a href="{{route('dashboard.index', ['pag' => 1])}}"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="{{route('dashboard.index', ['pag' => 2])}}"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="{{route('dashboard.index', ['pag' => 3])}}"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
+          <a href="{{route('dashboard.index', ['pag' => 4])}}"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="#"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="#"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>
           <a href="#"><img src="\images\equilibrium_photos\images\dashboard\habits.png" alt="" width="55%"/></a>

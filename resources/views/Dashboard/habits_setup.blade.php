@@ -7,41 +7,43 @@
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/css/ListStyle.css">
-  </head>
-  <body>
-		
-		<section class="ftco-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<h2 class="heading-section mb-5 pb-md-4">Checkbox #04</h2>
-					</div>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/ListStyle.css">
+</head>
+<body>
+	
+	<section class="ftco-section">
+		<div class="container">
+			<div class="">
+				<div class="col-md-12 text-center">
+					<h2 class="heading-section mb-5 pb-md-4">teste</h2>
 				</div>
+			</div>
+			@foreach($habits as $category => $habits_array)
+			<br>
 				<div class="row justify-content-center">
 					<div class="col-md-4">
 						<div class="wrap w-100">
 							<div class="heading-title mb-4 text-center">
-								<h3>Choose your sports</h3>
+								<h3>{{$category}}</h3>
 							</div>
 							<ul class="ks-cboxtags p-0 m-0">
 						    <form method="post" action="{{route('dashboard.habits.setup')}}">
 							@csrf
-							@foreach($habits as $category => $habits_array)
 								@foreach($habits_array as $habit)
 									<li> {{-- need to bring id to make it easier when uploading to database--}}
-										<input type="checkbox" id="{{$habit}}" value="{{$habit}}" name="{{$category}}.{{$habit}}" checked>
+										<input type="checkbox" id="{{$habit}}" value="{{$habit}}" name="{{$category}}.{{$habit}}" >
 										<label for="{{$habit}}">"{{$habit}}"</label>
 									</li>
 								@endforeach
-						    @endforeach
-						  </ul>
+							</ul>
 						</div>
 					</div>
 				</div>
+				@endforeach
 			</div>
 		</section>
+		<center>
 		<button type="submit">salvar</button>
 
     <script src="js/jquery.min.js"></script>

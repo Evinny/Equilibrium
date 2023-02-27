@@ -20,7 +20,10 @@
 
 </head>
 <body>
-    <br><img src='../public/images/logo-default-450x37.png alt='arrow'><br>
+    
+    <a href='{{route('dashboard.index')}}'>
+    <img src='/images\equilibrium_photos\images\dashboard\arrow-pointing-to-left.png' alt='arrow' width="30" height="18" style="margin:1%;"><br>
+    </a>
     <hr>
 <br><br>
     <form method="post" autocomplete="off" action="{{route('dashboard.input.insert')}}">
@@ -34,7 +37,7 @@
     <p align=left>Dia:*
         <span>
             <input style='float:right;width: 65%;height:50px;border-style: ridge; border-radius: 5px; border-width: 1px;padding: 10px;'
-                    name="data" id="data" type="datetime-local" > 
+                    name="data" id="data" type="datetime-local" value="{{$date}}"> 
         </span>
     </p>
 
