@@ -90,7 +90,6 @@ public function ResponsesPlucker($_user, $columnName){
     }
 //Returns: arr['$habit name => times that user did that habit']
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//=============================================================================================================//
     public function index(request $request){
         
         $_user = auth::user();
